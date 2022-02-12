@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navigation from './Pages/Shared/Navigation/Navigation';
 import Home from './Pages/Home/Home/Home';
+import Footer from './Pages/Shared/Footer/Footer';
 
 function App() {
   return (
@@ -9,43 +10,44 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <Switch>
-          <Route exact to="/">
+          <Route exact path="/">
             <Home />
           </Route>
-          <Route to="/home">
+          <Route path="/home">
             <Home />
           </Route>
-          <Route to="/login">
+          <Route path="/login">
 
           </Route>
-          <Route to="/register">
+          <Route path="/register">
 
           </Route>
-          <Route to="/book-order">
+          <Route path="/book-order">
 
           </Route>
-          <Route to="/my-orders">
+          <Route path="/my-orders">
 
           </Route>
-          <Route to="/all-orders">
+          <Route path="/all-orders">
 
           </Route>
-          <Route to="/all-products">
+          <Route path="/all-watches">
 
           </Route>
-          <Route to="/make-review">
+          <Route path="/make-review">
 
           </Route>
-          <Route to="/make-payment">
+          <Route path="/make-payment">
 
           </Route>
-          <Route to="/our-blog">
+          <Route path="/our-blog">
 
           </Route>
-          <Route to="/about-us">
+          <Route path="/about-us">
 
           </Route>
         </Switch>
+        <Footer />
       </BrowserRouter>
     </div>
   );

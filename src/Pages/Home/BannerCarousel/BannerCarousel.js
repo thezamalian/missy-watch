@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, MobileStepper, Paper, Typography, Button } from '@mui/material';
+import { Box, MobileStepper, Button } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
@@ -50,20 +50,6 @@ function BannerCarousel() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <Paper
-                square
-                elevation={0}
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    // height: 50,
-                    // width: '100%',
-                    pl: 2,
-                    bgcolor: 'background.default',
-                }}
-            >
-                {/* <Typography>{images[activeStep].label}</Typography> */}
-            </Paper>
             <AutoPlaySwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={activeStep}
@@ -76,7 +62,7 @@ function BannerCarousel() {
                             <Box
                                 component="img"
                                 sx={{
-                                    height: 450,
+                                    height: 500,
                                     display: 'block',
                                     // maxWidth: "90%",
                                     overflow: 'hidden',
@@ -97,33 +83,33 @@ function BannerCarousel() {
                 nextButton={
                     <Button
                         size="large"
-                        sx={{ mt: -50 }}
+                        sx={{ mt: -65 }}
                         color="warning"
                         onClick={handleNext}
                         disabled={activeStep === maxSteps - 1}
                     >
-                        Next
+                        {/* Next */}
                         {theme.direction === 'rtl' ? (
-                            <KeyboardArrowLeft />
+                            <KeyboardArrowLeft sx={{ fontSize: '40px', border: '1px solid black', borderRadius: '5%', '&:hover': { bgcolor: 'black' } }} />
                         ) : (
-                            <KeyboardArrowRight />
+                            <KeyboardArrowRight sx={{ fontSize: '40px', border: '1px solid black', borderRadius: '5%', '&:hover': { bgcolor: 'black' } }} />
                         )}
                     </Button>
                 }
                 backButton={
                     <Button
                         size="large"
-                        sx={{ mt: -50, color: '' }}
+                        sx={{ mt: -65 }}
                         color="warning"
                         onClick={handleBack}
                         disabled={activeStep === 0}
                     >
                         {theme.direction === 'rtl' ? (
-                            <KeyboardArrowRight />
+                            <KeyboardArrowRight sx={{ fontSize: '40px', border: '1px solid black', borderRadius: '5%', '&:hover': { bgcolor: 'black' } }} />
                         ) : (
-                            <KeyboardArrowLeft />
+                            <KeyboardArrowLeft sx={{ fontSize: '40px', border: '1px solid black', borderRadius: '5%', '&:hover': { bgcolor: 'black' } }} />
                         )}
-                        Back
+                        {/* Back */}
                     </Button>
                 }
             />

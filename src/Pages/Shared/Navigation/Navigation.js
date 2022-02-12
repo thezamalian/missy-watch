@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { NavLink } from 'react-router-dom';
 
-const pages = ['All Watches', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['All Watches', 'Our Blog', 'About Us'];
+const pageLinks = ['all-watches', 'our-blog', 'about-us'];
+const dashboard = ['My Orders', 'Make Payment', 'Make Review'];
+const dashboardLinks = ['my-orders', 'make-payment', 'make-review'];
 
 const Navigation = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -28,14 +31,18 @@ const Navigation = () => {
         <AppBar position="static" sx={{ bgcolor: 'black' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
+
                     <Typography
                         variant="h4"
                         noWrap
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        Missy Watch
+                        <NavLink to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                            Missy Watch
+                        </NavLink>
                     </Typography>
+
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -66,35 +73,61 @@ const Navigation = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
+                            {pages.map((page, index) => (
+                                <NavLink
+                                    to={`/${pageLinks[index]}`}
+                                    style={{ textDecoration: 'none', color: 'black' }}
+                                >
+                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </MenuItem>
+                                </NavLink>
+
                             ))}
                         </Menu>
                     </Box>
+
                     <Typography
                         variant="h4"
                         noWrap
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
-                        Missy Watch
+                        <NavLink to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                            Missy Watch
+                        </NavLink>
                     </Typography>
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                        {pages.map((page, index) => (
+                            <NavLink
+                                to={`/${pageLinks[index]}`}
+                                style={{ textDecoration: 'none', color: 'black' }}
                             >
-                                {page}
-                            </Button>
+                                <Button
+                                    key={page}
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    {page}
+                                </Button>
+                            </NavLink>
                         ))}
                     </Box>
 
+                    <NavLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+                        <Button
+                            size="large"
+                            variant="contained"
+                            color='warning'
+                            sx={{ m: 2, color: 'white', display: 'block', }}
+                        >
+                            Login
+                        </Button>
+                    </NavLink>
+
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
+                        <Tooltip title="Open Dashboard">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                             </IconButton>
@@ -115,16 +148,24 @@ const Navigation = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
+                            {dashboard.map((dash, index) => (
+                                <NavLink
+                                    to={`/${dashboardLinks[index]}`}
+                                    style={{ textDecoration: 'none', color: 'black' }}
+                                >
+                                    <MenuItem key={dash} onClick={handleCloseUserMenu}>
+                                        <Typography textAlign="center">{dash}</Typography>
+                                    </MenuItem>
+                                </NavLink>
                             ))}
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center">Logout</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>
             </Container>
-        </AppBar>
+        </AppBar >
     );
 };
 export default Navigation;
