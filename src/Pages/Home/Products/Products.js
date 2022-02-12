@@ -1,11 +1,32 @@
-import React from 'react';
+import * as React from 'react';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import { Box, Paper, Grid, Container, Typography } from '@mui/material';
+import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
+
+const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    backgroundColor: 'yellowgreen',
+    height: 200,
+    color: theme.palette.text.secondary,
+}));
 
 const Products = () => {
     return (
-        <div>
-            <h1>Best Watches</h1>
-        </div>
+        <Container container>
+            <Typography variant='h4' sx={{ mb: 4, mt: 8 }}>
+                Best Watches
+            </Typography>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    {Array.from(Array(6)).map((_, index) => (
+                        <SingleProduct key={index} Item={Item} />
+                    ))}
+                </Grid>
+            </Box>
+        </Container>
     );
-};
+}
 
 export default Products;

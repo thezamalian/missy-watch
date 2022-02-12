@@ -22,10 +22,11 @@ const iconStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  color: 'white',
   borderRadius: '10px',
   mr: 1,
   '&:hover': {
-    color: 'white',
+    color: 'blue',
   },
 };
 

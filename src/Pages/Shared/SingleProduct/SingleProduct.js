@@ -1,10 +1,11 @@
 import React from 'react';
+import { Grid } from '@mui/material';
 
-const SingleProduct = () => {
+const SingleProduct = ({ Item }) => {
     return (
-        <div>
-            <h2>Single Product</h2>
-        </div>
+        <Grid item xs={4} sm={4} md={4} >
+            <Item>xs=2</Item>
+        </Grid>
     );
 };
 

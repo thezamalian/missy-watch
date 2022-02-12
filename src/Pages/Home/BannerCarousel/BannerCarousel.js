@@ -62,7 +62,7 @@ function BannerCarousel() {
                             <Box
                                 component="img"
                                 sx={{
-                                    height: 500,
+                                    height: '50vw',
                                     display: 'block',
                                     // maxWidth: "90%",
                                     overflow: 'hidden',
@@ -83,7 +83,7 @@ function BannerCarousel() {
                 nextButton={
                     <Button
                         size="large"
-                        sx={{ mt: -65 }}
+                        sx={{ mt: '-50vw' }}
                         color="warning"
                         onClick={handleNext}
                         disabled={activeStep === maxSteps - 1}
@@ -99,7 +99,7 @@ function BannerCarousel() {
                 backButton={
                     <Button
                         size="large"
-                        sx={{ mt: -65 }}
+                        sx={{ mt: '-50vw' }}
                         color="warning"
                         onClick={handleBack}
                         disabled={activeStep === 0}
