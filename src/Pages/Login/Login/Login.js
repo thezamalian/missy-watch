@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Container, Grid, TextField, Typography, Button, InputAdornment, IconButton, FormControl, InputLabel, OutlinedInput } from '@mui/material';
-import GoogleIcon from '@mui/icons-material/Google';
-import watchAndSun from '../../../assets/watch-sun.jpg';
-import { Link } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-// import Google from '@mui/icons-material/Google';
-
-// const customSX = {
-//     // background: `url(${watchAndSun})`,
-//     // backgroundSize: '100%',
-//     // backgroundRepeat: 'no-repeat',
-//     height: '60vw',
-//     mt: 0,
-//     mx: 'auto'
-// }
+import GoogleIcon from '@mui/icons-material/Google';
+import { Link } from 'react-router-dom';
+import watchAndSun from '../../../assets/watch-sun.jpg';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({ email: 'admin@admin.com', password: '123456' });
