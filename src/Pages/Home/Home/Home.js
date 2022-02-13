@@ -11,8 +11,9 @@ const Home = () => {
         <div>
             <BannerCarousel />
             <Products />
-            <SpecialEdition />
-            <LatestBlogs />
+
+            {/* <SpecialEdition />
+            <LatestBlogs /> */}
             <Reviews />
             <Subscribe />
         </div>

@@ -10,24 +10,24 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
     {
-        label: 'San Francisco – Oakland Bay Bridge, United States',
+        label: 'Seiko SKX007 watch',
         imgPath:
-            'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
+            'https://images.unsplash.com/photo-1512034705137-dc51c5ed36f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=861&q=80',
     },
     {
-        label: 'Bird',
+        label: 'I dropped this watch into a glass of water and photographed it from above.',
         imgPath:
-            'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+            'https://images.unsplash.com/photo-1580658001207-ccd9b884191c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
     },
     {
-        label: 'Bali, Indonesia',
+        label: 'Businessman checking the time',
         imgPath:
-            'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
+            'https://images.unsplash.com/photo-1495704907664-81f74a7efd9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=60',
     },
     {
-        label: 'Goč, Serbia',
+        label: 'Risky shot taken at the beach hoping my gear didn’t get wet.',
         imgPath:
-            'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+            'https://images.unsplash.com/photo-1517463700628-5103184eac47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80',
     },
 ];
 
@@ -73,8 +73,8 @@ function BannerCarousel() {
                                 alt={step.label}
                             />
                         ) : null}
-                    </div>
-                ))}
+                    </div>))}
+
             </AutoPlaySwipeableViews>
             <MobileStepper
                 steps={maxSteps}

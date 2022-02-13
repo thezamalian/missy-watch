@@ -3,7 +3,10 @@ import React from 'react';
 const NotFound = () => {
     return (
         <div>
-            <h2>Page is not found</h2>
+            <h1>Missy Watch</h1>
+            <h5>404. That’s an error. </h5>
+            <p>The requested URL was not found on this server. That’s all we know.</p>
+            <img src="https://www.google.com/images/errors/robot.png" alt="" />
         </div>
     );
 };
