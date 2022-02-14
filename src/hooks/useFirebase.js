@@ -20,37 +20,45 @@ const useFirebase = () => {
             } else {
                 setUser({});
             }
+            setAuthError('');
             setIsLoading(false);
         });
         return unsubscribe;
     }, [auth])
 
-    const registerWithEmail = (email, password, name, photo) => {
+    const registerWithEmail = (email, password, name, photo, history) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setUser(userCredential.user);
+
                 const newUser = { ...user }
                 newUser.displayName = name;
                 newUser.photoURL = photo;
                 setUser(newUser);
+                setAuthError('');
 
                 updateProfile(auth.currentUser, {
                     displayName: name, photoURL: photo
                 }).then(() => {
                 }).catch((error) => {
                 });
+                history.replace('/');
             })
             .catch((error) => {
                 setAuthError(error.message);
             }).finally(() => setIsLoading(false));
     }
 
-    const loginWithEmail = (email, password) => {
+    const loginWithEmail = (email, password, location, history) => {
         setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setUser(userCredential.user);
+                setAuthError('');
+
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
             })
             .catch((error) => {
                 setAuthError(error.message);
@@ -62,6 +70,7 @@ const useFirebase = () => {
         signInWithPopup(auth, googleProvider)
             .then((userCredential) => {
                 setUser(userCredential.user);
+                setAuthError('');
             })
             .catch((error) => {
                 setAuthError(error.message);
@@ -72,6 +81,7 @@ const useFirebase = () => {
         setIsLoading(true);
         signOut(auth).then(() => {
             setUser({});
+            setAuthError('');
         }).catch((error) => {
             setAuthError('');
         }).finally(() => setIsLoading(false));
