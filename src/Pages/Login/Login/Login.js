@@ -4,10 +4,13 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Link } from 'react-router-dom';
 import watchAndSun from '../../../assets/watch-sun.jpg';
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({ email: 'admin@admin.com', password: '123456' });
     const [showPassword, setShowPassword] = useState(false);
+
+    const { authError, isLoading, loginWithEmail, googleSignIn, } = useAuth();
 
     const handleOnChange = (e) => {
         const field = e.target.name;
@@ -15,12 +18,15 @@ const Login = () => {
         const newLoginData = { ...loginData };
 
         newLoginData[field] = value;
-        console.log(newLoginData);
+        // console.log(newLoginData);
         setLoginData(newLoginData);
     };
 
     const handleFormSubmit = (e) => {
-        console.log(loginData);
+        // console.log(loginData);
+        const { email, password } = loginData;
+        loginWithEmail(email, password);
+
         e.preventDefault();
     }
 
@@ -112,6 +118,7 @@ const Login = () => {
                             OR
                         </Typography>
                         <Button
+                            onClick={googleSignIn}
                             size='large'
                             variant="contained"
                             // color='warning'

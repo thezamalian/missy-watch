@@ -10,14 +10,13 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
     {
-        label: 'Seiko SKX007 watch',
-        imgPath:
-            'https://images.unsplash.com/photo-1512034705137-dc51c5ed36f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=861&q=80',
-    },
-    {
         label: 'I dropped this watch into a glass of water and photographed it from above.',
         imgPath:
             'https://images.unsplash.com/photo-1580658001207-ccd9b884191c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+    }, {
+        label: 'Seiko SKX007 watch',
+        imgPath:
+            'https://images.unsplash.com/photo-1512034705137-dc51c5ed36f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=861&q=80',
     },
     {
         label: 'Businessman checking the time',

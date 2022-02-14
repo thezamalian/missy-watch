@@ -1,17 +1,26 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem, Divider } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const pages = ['All Watches', 'Our Blog', 'About Us'];
 const pageLinks = ['all-watches', 'our-blog', 'about-us'];
-const dashboard = ['My Orders', 'Make Payment', 'Make Review'];
-const dashboardLinks = ['my-orders', 'make-payment', 'make-review'];
+
+const userPanel = ['My Orders', 'Make Payment', 'Place Order', 'Make Review'];
+const userPanelLinks = ['my-orders', 'make-payment', 'place-order', 'make-review',];
+
+const adminPanel = ['Manage All Orders', 'Manage Products', 'Add Product', 'Make Admin'];
+const adminPanelLinks = ['manage-all-orders', 'manage-products', 'add-product', 'make-admin'];
 
 const Navigation = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+    const { user, logout } = useAuth();
+    const { email, displayName, photoURL } = user;
+
+    // console.log(user);
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -115,7 +124,7 @@ const Navigation = () => {
                         ))}
                     </Box>
 
-                    <NavLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+                    {!email ? <NavLink to="/login" style={{ textDecoration: 'none', color: 'white' }}>
                         <Button
                             size="large"
                             variant="contained"
@@ -124,12 +133,10 @@ const Navigation = () => {
                         >
                             Login
                         </Button>
-                    </NavLink>
-
-                    <Box sx={{ flexGrow: 0 }}>
+                    </NavLink> : <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open Dashboard">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt={displayName} src={photoURL} />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -148,9 +155,13 @@ const Navigation = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {dashboard.map((dash, index) => (
+                            <MenuItem >
+                                <Typography textAlign="center">Hello {displayName}</Typography>
+                            </MenuItem>
+                            <Divider />
+                            {userPanel.map((dash, index) => (
                                 <NavLink
-                                    to={`/${dashboardLinks[index]}`}
+                                    to={`/${userPanelLinks[index]}`}
                                     style={{ textDecoration: 'none', color: 'black' }}
                                 >
                                     <MenuItem key={dash} onClick={handleCloseUserMenu}>
@@ -158,11 +169,16 @@ const Navigation = () => {
                                     </MenuItem>
                                 </NavLink>
                             ))}
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            <MenuItem onClick={
+                                () => {
+                                    handleCloseUserMenu();
+                                    logout();
+                                }}>
                                 <Typography textAlign="center">Logout</Typography>
                             </MenuItem>
                         </Menu>
                     </Box>
+                    }
                 </Toolbar>
             </Container>
         </AppBar >

@@ -4,23 +4,30 @@ import GoogleIcon from '@mui/icons-material/Google';
 import watchAndSun from '../../../assets/watch-sun.jpg';
 import { Link } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import useAuth from '../../../hooks/useAuth';
 
 const Register = () => {
-    const [loginData, setLoginData] = useState();
+    const [registrationData, setRegistrationData] = useState();
     const [showPassword, setShowPassword] = useState(false);
+
+    const { authError, isLoading, registerWithEmail, googleSignIn, } = useAuth();
 
     const handleOnChange = (e) => {
         const field = e.target.name;
         const value = e.target.value;
-        const newLoginData = { ...loginData };
+        const newRegistrationData = { ...registrationData };
 
-        newLoginData[field] = value;
-        console.log(newLoginData);
-        setLoginData(newLoginData);
+        newRegistrationData[field] = value;
+        console.log(newRegistrationData);
+        setRegistrationData(newRegistrationData);
     };
 
     const handleFormSubmit = (e) => {
-        console.log(loginData);
+        // console.log(registrationData);
+        const { name, photo, email, password } = registrationData;
+
+        registerWithEmail(email, password, name, photo);
+
         e.preventDefault();
     }
 
@@ -57,7 +64,7 @@ const Register = () => {
                             id="outlined-basic"
                             label="Your Name"
                             variant="outlined"
-                            // defaultValue={loginData.email}
+                            // defaultValue={registrationData.email}
                             onChange={handleOnChange}
                             name='name'
                             type='text'
@@ -66,7 +73,7 @@ const Register = () => {
                             id="outlined-basic"
                             label="Paste Your Photo URL"
                             variant="outlined"
-                            // defaultValue={loginData.email}
+                            // defaultValue={registrationData.email}
                             onChange={handleOnChange}
                             name='photo'
                             type='text'
@@ -75,7 +82,7 @@ const Register = () => {
                             id="outlined-basic"
                             label="Your Email"
                             variant="outlined"
-                            // defaultValue={loginData.email}
+                            // defaultValue={registrationData.email}
                             onChange={handleOnChange}
                             name='email'
                             type='email'
@@ -86,7 +93,7 @@ const Register = () => {
                                 id="outlined-adornment-password"
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
-                                // defaultValue={loginData.password}
+                                // defaultValue={registrationData.password}
                                 // value={values.password}
                                 onChange={handleOnChange}
                                 endAdornment={
@@ -131,6 +138,7 @@ const Register = () => {
                             OR
                         </Typography>
                         <Button
+                            onClick={googleSignIn}
                             size='large'
                             variant="contained"
                             // color='warning'

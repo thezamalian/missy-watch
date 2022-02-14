@@ -17,67 +17,73 @@ import AddProduct from './Pages/AdminPanel/AddProduct/AddProduct';
 import PlaceOrder from './Pages/UserPanel/PlaceOrder/PlaceOrder';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import AboutUs from './Pages/AboutUs/AboutUs';
+import AuthProvider from './contexts/AuthProvider/AuthProvider';
+import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navigation />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/book-order">
-            <BookOrder />
-          </Route>
-          <Route path="/all-watches">
-            <AllProducts />
-          </Route>
-          {/* User Panel Routes */}
-          <Route path="/my-orders">
-            <MyOrders />
-          </Route>
-          <Route path="/make-review">
-            <MakeReview />
-          </Route>
-          <Route path="/make-payment">
-            <MakePayment />
-          </Route>
-          <Route path="/place-order">
-            <PlaceOrder />
-          </Route>
-          {/* Admin Panel Routes */}
-          <Route path="/all-orders">
-            <ManageAllOrders />
-          </Route>
-          <Route path="/manage-products">
-            <ManageProducts />
-          </Route>
-          <Route path="/add-product">
-            <AddProduct />
-          </Route>
-          <Route path="/make-admin">
-            <MakeAdmin />
-          </Route>
+      <AuthProvider >
+        <BrowserRouter>
+          <Navigation />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <PrivateRoute path="/book-order">
+              <BookOrder />
+            </PrivateRoute>
+            <Route path="/all-watches">
+              <AllProducts />
+            </Route>
 
-          <Route path="/about-us">
-            <AboutUs />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-        <Footer />
-      </BrowserRouter>
+            {/* User Panel Routes */}
+            <PrivateRoute path="/my-orders">
+              <MyOrders />
+            </PrivateRoute>
+            <PrivateRoute path="/make-review">
+              <MakeReview />
+            </PrivateRoute>
+            <PrivateRoute path="/make-payment">
+              <MakePayment />
+            </PrivateRoute>
+            <PrivateRoute path="/place-order">
+              <PlaceOrder />
+            </PrivateRoute>
+
+            {/* Admin Panel Routes */}
+            <PrivateRoute path="/manage-all-orders">
+              <ManageAllOrders />
+            </PrivateRoute>
+            <PrivateRoute path="/manage-products">
+              <ManageProducts />
+            </PrivateRoute>
+            <PrivateRoute path="/add-product">
+              <AddProduct />
+            </PrivateRoute>
+            <PrivateRoute path="/make-admin">
+              <MakeAdmin />
+            </PrivateRoute>
+
+            <Route path="/about-us">
+              <AboutUs />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

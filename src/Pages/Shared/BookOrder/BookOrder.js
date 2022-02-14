@@ -4,11 +4,14 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import watchAndSun from '../../../assets/watch-sun.jpg';
+import useAuth from '../../../hooks/useAuth';
 
 
 const BookOrder = () => {
     const [bookingData, setBookingData] = useState();
     const [date, setDate] = React.useState(new Date());
+
+    const { user, isLoading } = useAuth();
 
     const handleOnChange = (e) => {
         const field = e.target.name;
