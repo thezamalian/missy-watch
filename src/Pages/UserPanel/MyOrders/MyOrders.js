@@ -9,7 +9,7 @@ const MyOrders = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        const uri = `http://localhost:5000/my-orders/${user.email}`;
+        const uri = `https://missy-watch.herokuapp.com/my-orders/${user.email}`;
         fetch(uri)
             .then(res => res.json())
             .then(data => {
@@ -23,7 +23,7 @@ const MyOrders = () => {
         setOrders(remaining);
 
         if (proceed) {
-            const uri = `http://localhost:5000/orders/${id}`;
+            const uri = `https://missy-watch.herokuapp.com/orders/${id}`;
             fetch(uri, {
                 method: 'DELETE'
             })

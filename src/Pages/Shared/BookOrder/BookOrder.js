@@ -42,7 +42,7 @@ const BookOrder = () => {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(bookingData)
         }
-        const uri = 'http://localhost:5000/orders';
+        const uri = 'https://missy-watch.herokuapp.com/orders';
 
         fetch(uri, requestOptions)
             .then(res => res.json())
