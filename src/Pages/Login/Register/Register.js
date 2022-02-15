@@ -8,7 +8,7 @@ import useAuth from '../../../hooks/useAuth';
 import { useHistory } from 'react-router-dom';
 
 const Register = () => {
-    const [registrationData, setRegistrationData] = useState();
+    const [registrationData, setRegistrationData] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const history = useHistory();
 

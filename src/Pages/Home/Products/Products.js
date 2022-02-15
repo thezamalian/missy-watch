@@ -10,7 +10,7 @@ const Products = () => {
         fetch(uri)
             .then(res => res.json())
             .then(data => setProducts(data));
-    }, [])
+    }, []);
 
     return (
         <Container container>

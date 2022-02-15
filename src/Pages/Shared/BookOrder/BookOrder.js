@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
-import watchAndSun from '../../../assets/watch-sun.jpg';
 import useAuth from '../../../hooks/useAuth';
+import { useParams } from 'react-router-dom';
 
 
 const BookOrder = () => {
-    const [bookingData, setBookingData] = useState();
-    const [date, setDate] = React.useState(new Date());
+    const { id } = useParams();
+    const { user } = useAuth();
 
-    const { user, isLoading } = useAuth();
+    const [date, setDate] = useState(new Date());
+    const [bookingData, setBookingData] = useState({ receiverName: user.displayName, receiverEmail: user.email, receivingDateTime: date, isPending: true, orderer: user, });
+
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        const uri = `https://missy-watch.herokuapp.com/products/${id}`
+        fetch(uri)
+            .then(res => res.json())
+            .then(data => {
+                setProduct(data);
+                setBookingData({ ...bookingData, product, });
+            });
+    }, [id, product, bookingData]);
 
     const handleOnChange = (e) => {
         const field = e.target.name;
@@ -24,6 +37,21 @@ const BookOrder = () => {
     };
 
     const handleFormSubmit = (e) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(bookingData)
+        }
+        const uri = 'http://localhost:5000/orders';
+
+        fetch(uri, requestOptions)
+            .then(res => res.json())
+            .then(result => {
+                if (result.insertedId) {
+                    alert('This Product is Booked Successfully!');
+                }
+            });
+
         console.log(bookingData);
         e.preventDefault();
     };
@@ -32,7 +60,16 @@ const BookOrder = () => {
             <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
 
                 <Grid item xs={4} sm={4} md={6} sx={{ display: { xs: 'none', sm: 'block' }, ms: 0 }}>
-                    <img src={watchAndSun} style={{ width: '100%', marginRight: 'auto' }} alt="" />
+                    <img src={product.img} style={{ width: '100%', marginRight: 'auto' }} alt="" />
+                    <Typography variant="h4">
+                        {product.name}
+                    </Typography>
+                    <Typography variant="body1">
+                        Price: ${product.price}
+                    </Typography>
+                    <Typography variant="body2">
+                        {product.details}
+                    </Typography>
                 </Grid>
 
                 <Grid item xs={4} sm={4} md={6} sx={{ mx: 'auto' }}>
@@ -52,18 +89,18 @@ const BookOrder = () => {
                             id="outlined-basic"
                             label="Receiver Name"
                             variant="outlined"
-                            // defaultValue={user.email}
+                            defaultValue={user.displayName}
                             onChange={handleOnChange}
-                            name='name'
+                            name='receiverName'
                             type='text'
                         />
                         <TextField
                             id="outlined-basic"
                             label="Receiver Email"
                             variant="outlined"
-                            // defaultValue={user.email}
+                            defaultValue={user.email}
                             onChange={handleOnChange}
-                            name='email'
+                            name='receiverEmail'
                             type='email'
                         />
                         <TextField
@@ -72,7 +109,7 @@ const BookOrder = () => {
                             variant="outlined"
                             // defaultValue={user.email}
                             onChange={handleOnChange}
-                            name='phone'
+                            name='receiverPhone'
                             type='tel'
                         />
                         <TextField
@@ -81,7 +118,7 @@ const BookOrder = () => {
                             variant="outlined"
                             // defaultValue={user.email}
                             onChange={handleOnChange}
-                            name='address'
+                            name='receiverAddress'
                             type='text'
                         />
                         <LocalizationProvider
@@ -96,6 +133,7 @@ const BookOrder = () => {
                                     id="outlined-basic"
                                     label="Receiving Time and Date"
                                     sx={{ mx: 'auto' }}
+                                    name="receivingDateTime"
                                 />}
                                 value={date}
                                 onChange={(newDate) => {
@@ -108,6 +146,7 @@ const BookOrder = () => {
                             size='large'
                             variant="contained"
                             // color='warning'
+                            type='submit'
                             sx={{
                                 mt: 4, bgcolor: 'black', color: 'white', width: '100%',
                                 '&:hover': { bgcolor: 'yellow', color: 'black' }

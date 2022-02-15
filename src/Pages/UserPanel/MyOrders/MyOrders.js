@@ -9,7 +9,7 @@ const MyOrders = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        const uri = `https://serene-wildwood-59933.herokuapp.com/my-orders/${user.email}`;
+        const uri = `http://localhost:5000/my-orders/${user.email}`;
         fetch(uri)
             .then(res => res.json())
             .then(data => {
@@ -21,8 +21,9 @@ const MyOrders = () => {
         const proceed = window.confirm('Are you Sure?');
         const remaining = orders.filter(order => order._id !== id);
         setOrders(remaining);
+
         if (proceed) {
-            const uri = `https://serene-wildwood-59933.herokuapp.com/orders/${id}`;
+            const uri = `http://localhost:5000/orders/${id}`;
             fetch(uri, {
                 method: 'DELETE'
             })
@@ -37,7 +38,7 @@ const MyOrders = () => {
     // ---------------------------------------
     return (
         <div className='mb-5 mx-auto' style={{ minHeight: '300px', textAlign: 'center' }}>
-            <h2 className='my-5 mx-auto' style={{ textAlign: 'center' }}>All Booked Orders!</h2>
+            <h2 className='my-5 mx-auto' style={{ textAlign: 'center' }}>All of Your Booked Orders!</h2>
 
             <div className='row row-cols-4 row-cols-md-4  my-2'>
                 <h5 className='mx-auto' style={{ textAlign: 'center' }}>Orders</h5>
@@ -53,10 +54,10 @@ const MyOrders = () => {
                     orders.map(order => <li key={order._id}>
                         <div className='row row-cols-4 row-cols-md-4 flex-wrap my-2'>
                             <h5 style={{ textAlign: 'left', display: 'flex' }}>
-                                <Avatar alt="Real Sharp" src={order.img} style={{ marginRight: 3 }} />
-                                {order?.name}
+                                <Avatar alt={order?.product?.name} src={order?.product?.img} style={{ marginRight: 3 }} />
+                                {order?.product?.name}
                             </h5>
-                            <p>{order?.user?.name} </p>
+                            <p>{order?.orderer?.displayName} </p>
                             {
                                 order?.isPending ? <span>Pending </span> : <p>Shipped </p>
                             }

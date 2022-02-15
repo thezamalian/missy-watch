@@ -39,7 +39,7 @@ function App() {
             <Route path="/register">
               <Register />
             </Route>
-            <PrivateRoute path="/book-order">
+            <PrivateRoute path="/book-order/:id">
               <BookOrder />
             </PrivateRoute>
             <Route path="/all-watches">
