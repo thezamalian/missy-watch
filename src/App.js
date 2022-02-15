@@ -19,10 +19,29 @@ import NotFound from './Pages/Shared/NotFound/NotFound';
 import AboutUs from './Pages/AboutUs/AboutUs';
 import AuthProvider from './contexts/AuthProvider/AuthProvider';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useAuth from './hooks/useAuth';
 
 function App() {
   const [headerFooter, setHeaderFooter] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    // setHeaderFooter(true);
+    const uri = 'https://missy-watch.herokuapp.com/all-admins';
+    fetch(uri)
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
+        data.forEach(admin => {
+          if (user.email === admin.email) {
+            setIsAdmin(true);
+          }
+        });
+      })
+  }, [user.email])
 
   return (
     <div className="App">

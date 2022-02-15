@@ -20,6 +20,23 @@ const Navigation = () => {
     const { user, logout } = useAuth();
     const { email, displayName, photoURL } = user;
 
+    const [isAdmin, setIsAdmin] = React.useState(false);
+
+    React.useEffect(() => {
+        // setHeaderFooter(true);
+        const uri = 'https://missy-watch.herokuapp.com/all-admins';
+        fetch(uri)
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                data.forEach(admin => {
+                    if (user.email === admin.email) {
+                        setIsAdmin(true);
+                    }
+                });
+            })
+    }, [user.email])
+
     // console.log(user);
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -159,16 +176,27 @@ const Navigation = () => {
                                 <Typography textAlign="center">Hello {displayName}</Typography>
                             </MenuItem>
                             <Divider />
-                            {userPanel.map((dash, index) => (
-                                <NavLink
-                                    to={`/${userPanelLinks[index]}`}
-                                    style={{ textDecoration: 'none', color: 'black' }}
-                                >
-                                    <MenuItem key={dash} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{dash}</Typography>
-                                    </MenuItem>
-                                </NavLink>
-                            ))}
+                            {isAdmin ?
+                                adminPanel.map((dash, index) => (
+                                    <NavLink
+                                        to={`/${adminPanelLinks[index]}`}
+                                        style={{ textDecoration: 'none', color: 'black' }}
+                                    >
+                                        <MenuItem key={dash} onClick={handleCloseUserMenu}>
+                                            <Typography textAlign="center">{dash}</Typography>
+                                        </MenuItem>
+                                    </NavLink>))
+                                :
+                                userPanel.map((dash, index) => (
+                                    <NavLink
+                                        to={`/${userPanelLinks[index]}`}
+                                        style={{ textDecoration: 'none', color: 'black' }}
+                                    >
+                                        <MenuItem key={dash} onClick={handleCloseUserMenu}>
+                                            <Typography textAlign="center">{dash}</Typography>
+                                        </MenuItem>
+                                    </NavLink>))
+                            }
                             <MenuItem onClick={
                                 () => {
                                     handleCloseUserMenu();

@@ -15,8 +15,8 @@ const Home = () => {
             {/* <SpecialEdition />
             <LatestBlogs /> */}
 
-            {/* <Reviews />
-            <Subscribe /> */}
+            {/* <Reviews /> */}
+            <Subscribe />
         </div>
     );
 };
