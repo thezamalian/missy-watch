@@ -83,18 +83,22 @@ function App() {
             </PrivateRoute>
 
             {/* Admin Panel Routes */}
-            <PrivateRoute path="/manage-all-orders">
-              <ManageAllOrders />
-            </PrivateRoute>
-            <PrivateRoute path="/manage-products">
-              <ManageProducts />
-            </PrivateRoute>
-            <PrivateRoute path="/add-product">
-              <AddProduct />
-            </PrivateRoute>
-            <PrivateRoute path="/make-admin">
-              <MakeAdmin />
-            </PrivateRoute>
+            {isAdmin &&
+              <>
+                <PrivateRoute path="/manage-all-orders">
+                  <ManageAllOrders />
+                </PrivateRoute>
+                <PrivateRoute path="/manage-products">
+                  <ManageProducts />
+                </PrivateRoute>
+                <PrivateRoute path="/add-product">
+                  <AddProduct />
+                </PrivateRoute>
+                <PrivateRoute path="/make-admin">
+                  <MakeAdmin />
+                </PrivateRoute>
+              </>
+            }
 
             <Route path="/about-us">
               <AboutUs />
