@@ -1,6 +1,7 @@
 import React from 'react';
 
-const NotFound = () => {
+const NotFound = ({ setHeaderFooter }) => {
+    setHeaderFooter(false);
     return (
         <div>
             <h1>Missy Watch</h1>

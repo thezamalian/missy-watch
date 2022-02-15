@@ -19,13 +19,16 @@ import NotFound from './Pages/Shared/NotFound/NotFound';
 import AboutUs from './Pages/AboutUs/AboutUs';
 import AuthProvider from './contexts/AuthProvider/AuthProvider';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
+import { useState } from 'react';
 
 function App() {
+  const [headerFooter, setHeaderFooter] = useState(true);
+
   return (
     <div className="App">
       <AuthProvider >
         <BrowserRouter>
-          <Navigation />
+          {headerFooter && <Navigation />}
           <Switch>
             <Route exact path="/">
               <Home />
@@ -78,10 +81,10 @@ function App() {
               <AboutUs />
             </Route>
             <Route path="*">
-              <NotFound />
+              <NotFound setHeaderFooter={setHeaderFooter} />
             </Route>
           </Switch>
-          <Footer />
+          {headerFooter && <Footer />}
         </BrowserRouter>
       </AuthProvider>
     </div>
